@@ -54,16 +54,18 @@ public class DoctorDataAccessService implements DoctorDao {
     }
 
     @Override
+    public int updateDoctorById(UUID id, Doctor doctor) {
+        String sql = "UPDATE doctor SET number = ?,actor = ?, startYear = ?, endYear = ? WHERE id = ?";
+        jdbcTemplate.update(sql, doctor.getNumber(), doctor.getActor(), doctor.getStartYear(), doctor.getEndYear(), id);
+        return 1;
+    }
+
+    @Override
     public int deleteDoctorById(UUID id) {
         String sql = "DELETE FROM doctor WHERE id = ?";
         jdbcTemplate.update(sql, id);
         return 1;
     }
 
-    @Override
-    public int updateDoctorById(UUID id, Doctor doctor) {
-        String sql = "UPDATE doctor SET number = ?,actor = ?, startYear = ?, endYear = ? WHERE id = ?";
-        jdbcTemplate.update(sql, doctor.getNumber(), doctor.getActor(), doctor.getStartYear(), doctor.getEndYear(), id);
-        return 1;
-    }
+
 }
