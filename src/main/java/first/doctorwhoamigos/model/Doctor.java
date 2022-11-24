@@ -6,6 +6,7 @@ import java.util.UUID;
 
 public class Doctor {
 
+
     private final UUID id;
     private final String number;
     private final String actor;
@@ -38,6 +39,16 @@ public class Doctor {
 
     public int getEndYear() {
         return endYear;
+    }
+
+    public final String toString() {
+        return "Doctor{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", actor='" + actor + '\'' +
+                ", startYear=" + startYear +
+                ", endYear=" + endYear +
+                '}';
     }
 
 }
