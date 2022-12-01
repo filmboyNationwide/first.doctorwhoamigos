@@ -19,6 +19,7 @@ public class DoctorDataAccessService implements DoctorDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    //Add in array posting functionality?
     @Override
     public int insertDoctor(UUID id, Doctor doctor) {
         String sql = "INSERT INTO doctor (id, number, actor, startYear, endYear) VALUES (?, ?, ?, ?, ?)";
@@ -39,6 +40,7 @@ public class DoctorDataAccessService implements DoctorDao {
         });
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public Optional<Doctor> selectDoctorById(UUID id) {
         String sql = "SELECT id, number, actor, startYear, endYear FROM doctor WHERE id = ?";
