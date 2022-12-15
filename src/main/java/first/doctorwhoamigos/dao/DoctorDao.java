@@ -19,7 +19,11 @@ public interface DoctorDao {
 
     Optional<Doctor> selectDoctorById(UUID id);
 
+    Optional<Doctor> selectDoctorByActor(String actor);
+
     int deleteDoctorById(UUID id);
+
+    int deleteDoctorByActor(String actor);
 
     int updateDoctorById(UUID id, Doctor doctor);
 }

@@ -13,6 +13,7 @@ import java.util.UUID;
 
 @RequestMapping("/doctor")
 @RestController
+@CrossOrigin
 class DoctorController {
 
     private final DoctorService doctorService;
@@ -31,9 +32,14 @@ class DoctorController {
     public List<Doctor> getAllDoctors() {
         return doctorService.getAllDoctors();
     }
-    @GetMapping(path = "{id}")
+    @GetMapping(path = "/id/{id}")
     public Optional<Doctor> getDoctorById(@Validated @PathVariable("id") UUID id){
         return Optional.ofNullable(doctorService.getDoctorById(id).orElse(null));
+    }
+
+    @GetMapping(path = "/actor/{actor}")
+    public Optional<Doctor> getDoctorByActor(@Validated @PathVariable("actor") String actor) {
+        return Optional.ofNullable(doctorService.getDoctorByActor(actor).orElse(null));
     }
 
     @PutMapping(path = "{id}")
@@ -42,10 +48,17 @@ class DoctorController {
         return doctorToUpdate;
     }
 
-    @DeleteMapping(path = "{id}")
+    @DeleteMapping(path = "/id/{id}")
     public Optional<Doctor> deleteDoctorById(@Validated @PathVariable("id") UUID id){
         Optional<Doctor> doctorToDelete = doctorService.getDoctorById(id);
         doctorService.deleteDoctor(id);
+        return doctorToDelete;
+    }
+
+    @DeleteMapping(path = "/actor/{actor}")
+    public Optional<Doctor> deleteDoctorById(@Validated @PathVariable("actor") String actor){
+        Optional<Doctor> doctorToDelete = doctorService.getDoctorByActor(actor);
+        doctorService.deleteDoctorByActor(actor);
         return doctorToDelete;
     }
 }

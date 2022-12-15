@@ -32,8 +32,16 @@ public class DoctorService {
         return doctorDao.selectDoctorById(id);
     }
 
+    public Optional<Doctor> getDoctorByActor(String actor) {
+        return doctorDao.selectDoctorByActor(actor);
+    }
+
     public int deleteDoctor(UUID id) {
         return doctorDao.deleteDoctorById(id);
+    }
+
+    public int deleteDoctorByActor(String actor) {
+        return doctorDao.deleteDoctorByActor(actor);
     }
 
     public int updateDoctor(UUID id, Doctor newDoctor) {

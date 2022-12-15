@@ -56,6 +56,20 @@ public class DoctorDataAccessService implements DoctorDao {
     }
 
     @Override
+    public Optional<Doctor> selectDoctorByActor(String actor) {
+        String sql = "SELECT id, number, actor, startYear, endYear FROM doctor WHERE actor = ?";
+        Doctor doctor = jdbcTemplate.queryForObject(sql, new Object[]{actor}, (resultSet, i) -> {
+            UUID doctorId = UUID.fromString(resultSet.getString("id"));
+            String number = resultSet.getString("number");
+            String doctorActor = resultSet.getString("actor");
+            int startYear = resultSet.getInt("startYear");
+            int endYear = resultSet.getInt("endYear");
+            return new Doctor(doctorId, number, doctorActor, startYear, endYear);
+        });
+        return Optional.ofNullable(doctor);
+    }
+
+    @Override
     public int updateDoctorById(UUID id, Doctor doctor) {
         String sql = "UPDATE doctor SET number = ?,actor = ?, startYear = ?, endYear = ? WHERE id = ?";
         jdbcTemplate.update(sql, doctor.getNumber(), doctor.getActor(), doctor.getStartYear(), doctor.getEndYear(), id);
@@ -66,6 +80,13 @@ public class DoctorDataAccessService implements DoctorDao {
     public int deleteDoctorById(UUID id) {
         String sql = "DELETE FROM doctor WHERE id = ?";
         jdbcTemplate.update(sql, id);
+        return 1;
+    }
+
+    @Override
+    public int deleteDoctorByActor(String actor) {
+        String sql = "DELETE FROM doctor WHERE actor = ?";
+        jdbcTemplate.update(sql, actor);
         return 1;
     }
 
