@@ -48,6 +48,12 @@ class DoctorController {
         return doctorToUpdate;
     }
 
+    @PatchMapping(path = "/actor/{actor}")
+    public Doctor updateDoctorByActor(@PathVariable("actor") String actor, @Validated @NonNull @RequestBody Doctor doctorToUpdate){
+        doctorService.updateDoctorByActor(actor, doctorToUpdate);
+        return doctorToUpdate;
+    }
+
     @DeleteMapping(path = "/id/{id}")
     public Optional<Doctor> deleteDoctorById(@Validated @PathVariable("id") UUID id){
         Optional<Doctor> doctorToDelete = doctorService.getDoctorById(id);

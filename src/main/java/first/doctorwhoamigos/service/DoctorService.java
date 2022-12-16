@@ -47,4 +47,8 @@ public class DoctorService {
     public int updateDoctor(UUID id, Doctor newDoctor) {
         return doctorDao.updateDoctorById(id, newDoctor);
     }
+    public int updateDoctorByActor(String actor, Doctor newDoctor) {
+        return doctorDao.updateDoctorByActor(actor, newDoctor);
+    }
+
 }

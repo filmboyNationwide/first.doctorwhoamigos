@@ -26,4 +26,6 @@ public interface DoctorDao {
     int deleteDoctorByActor(String actor);
 
     int updateDoctorById(UUID id, Doctor doctor);
+
+    int updateDoctorByActor(String actor, Doctor doctor);
 }
